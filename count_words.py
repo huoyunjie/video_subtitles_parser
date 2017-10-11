@@ -35,6 +35,7 @@ def count_words(subtitles_path, subtitles_type, out_file_name, mode):
 
     fileHandle = open(os.path.join(subtitles_path, out_file_name), 'w')
 
+    # Optimize: use string to store
     for word, num in dict:
         if mode == WORDS_MODE:
             fileHandle.write(word+'\n')

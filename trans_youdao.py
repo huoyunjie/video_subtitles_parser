@@ -4,6 +4,7 @@ import sys
 import re
 import urllib
 import subprocess
+from utils import *
 
 from utils import *
 
@@ -12,22 +13,22 @@ def trans_word(word, phonetic_mode):
     <h2 class="wordbook-js">
         <span class="keyword">hello</span>
                             <div class="baav">
-                            <span class="pronounce">英
-                                    <span class="phonetic">[h??l??]</span>
-                                                    <a href="#" title="真人发音" class="sp dictvoice voice-js log-js" data-rel="hello&type=1" data-4log="dict.basic.ec.uk.voice"></a>
+                            <span class="pronounce">?
+                                    <span class="phonetic">[h?'l??]</span>
+                                                    <a href="#" title="????" class="sp dictvoice voice-js log-js" data-rel="hello&type=1" data-4log="dict.basic.ec.uk.voice"></a>
                                 </span>
-                                      <span class="pronounce">美
-                                    <span class="phonetic">[h??lo]</span>
-                                                    <a href="#" title="真人发音" class="sp dictvoice voice-js log-js" data-rel="hello&type=2" data-4log="dict.basic.ec.us.voice"></a>
+                                      <span class="pronounce">?
+                                    <span class="phonetic">[h?'lo]</span>
+                                                    <a href="#" title="????" class="sp dictvoice voice-js log-js" data-rel="hello&type=2" data-4log="dict.basic.ec.us.voice"></a>
                                 </span>
                                   </div>
             </h2>
              <div class="trans-container">
 
    <ul>
-     <li>int. 喂；哈罗</li>
-     <li>n. 表示问候， 惊奇或唤起注意时的用语</li>
-     <li>n. (Hello)人名；(法)埃洛</li>
+     <li>int. ?;??</li>
+     <li>n. ????, ???????????</li>
+     <li>n. (Hello)??;(?)??</li>
     </ul>
 
     phonetic_mode: English = 0; American = -1
@@ -52,7 +53,7 @@ def trans_word(word, phonetic_mode):
       print_error('Can not translator this word: %s'%word)
       return None
 
-    # 中文翻译
+    # ????
     pattern2=re.compile('<li>.*?</li>')
     trans = []
     for i in pattern2.findall(result1):
@@ -60,7 +61,7 @@ def trans_word(word, phonetic_mode):
         trans.append(i.strip('<li>').strip('</li>'))
         # file_object.write(i.strip('<li>').strip('</li>')+'\n')
 
-    # 音标
+    # ??
     pattern3=re.compile('<span class="phonetic">.*?</span>')
 
     phonetic = pattern3.findall(result1)[phonetic_mode].strip('<span class="phonetic">').strip('</span>')
@@ -70,10 +71,10 @@ def trans_word(word, phonetic_mode):
 def structure_youdao_xml(word, phonetic_mode):
     '''
         <item>    <word>test</word>
-        <trans><![CDATA[n. 试验；检验;
-    vt. 试验；测试;
-    vi. 试验；测试;
-    n. (Test)人名；(英)特斯特]]></trans>
+        <trans><![CDATA[n. ??;??;
+    vt. ??;??;
+    vi. ??;??;
+    n. (Test)??;(?)???]]></trans>
         <phonetic><![CDATA[[test]]]></phonetic>
         <tags></tags>
         <progress>1</progress>
@@ -143,3 +144,5 @@ def trans_youdao_xml(file_words, trans_out_file, trans_error_file):
     fileHandleWords.close()
     fileHandlexml.close()
     errorFileHandlexml.close()
+
+    return RET_SUCCESS
